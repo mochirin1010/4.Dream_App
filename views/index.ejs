@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <%- include('head') %>
+
+  <body>
+    <%- include('header') %>
+
+    <div class="container">
+      <div class="list-name">
+        <h1><%= locals.username %>さんの目標・夢</h1>
+        <a href="/profile/<%= locals.userId %>">設定<span class="material-icons">miscellaneous_services</span></a>
+      </div>
+      <div class="goal-table">
+        <div class="table-head">
+          <div class="date-deadline">
+            <span class="date-column">設定日</span>
+            <span class="deadline-column">目標期限</span>
+          </div>
+          <div class="goal-column">目標・夢</div>
+        </div>
+        <ul class="table-body">
+          <% goals.forEach((goal) => { %>
+            <% if (locals.userId === goal.user_id) { %>
+              <li class="table-list">
+                <div class="item-data">
+                  <div class="date-deadline">
+                    <span class="date-column"><%= goal.date %></span>
+                    <span class="deadline-column"><%= goal.target_date %></span>
+                  </div>
+                  <div class="goal-column"><%= goal.content %></div>
+                </div>
+                <div class="item-menu">
+                  <form action="/goals_delete/<%= goal.id %>" method="POST">
+                    <input type="submit" value="削除" class="item-menu-btn">
+                  </form>
+                  <a href="/goals_edit/<%= goal.id %>" class="item-menu-btn">編集</a>
+                </div>
+              </li>
+            <% } %>
+          <% }); %>
+        </ul>
+      </div>
+      <div class="top-btn"><span class="material-icons">arrow_upward</span></div>
+    </div>
+
+    <script src="/js/script.js"></script>
+  </body>
+</html>

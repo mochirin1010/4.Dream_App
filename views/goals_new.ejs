@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <%- include('head') %>
+
+  <body>
+    <%- include('header') %>
+
+    <div class="container">
+      <form action="/goals_create" method="post">
+        <label for="date">設定日</label>
+        <input name="date" type="date"><br>
+        <label for="target_date">目標期限</label>
+        <input name="target_date" type="date"><br>
+        <label for="content">目標・夢</label>
+        <input name="content" type="text" class="content"><br>
+        <input name="user_id" type="text" id="user-id"><br>
+        <input type="submit" value="作成する" class="submit-btn">
+      </form>
+    </div>
+    
+
+  </body>
+</html>

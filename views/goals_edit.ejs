@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <%- include('head') %>
+
+  <body>
+    <%- include('header') %>
+
+    <div class="container">
+      <form action="/goals_update/<%= goal.id %>" method="POST">
+        <label for="date">設定日</label>
+        <input name="date" type="date" value="<%= goal.date %>"><br>
+        <label for="target_date">目標期限</label>
+        <input name="target_date" type="date" value="<%= goal.target_date %>"><br>
+        <label for="content">目標・夢</label>
+        <input name="content" type="text" value="<%= goal.content %>" class="content"><br>
+        <input type="submit" value="更新する" class="submit-btn">
+      </form>
+    </div>
+    
+  </body>
+</html>

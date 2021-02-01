@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <%- include('head') %>
+
+  <body>
+    <%- include('header') %>
+
+    <div class="container">
+      <div class="top-container">
+        <div class="top-left">
+          <h1>Dream App</h1>
+          <div class="top-about">
+            あなたの目標や夢を自由に投稿するアプリです。文字にしてみることで夢や目標が具体化され、それを何度も繰り返し見ることで潜在意識に刻まれると言われています。このアプリを使って、あなたの夢や目標を実現していきましょう！！！
+          </div>
+          <a href="/goals" class="goals-btn">みんなの目標・夢をみてみる</a>
+        </div>
+
+        <div class="panel">
+          <h2>ログイン</h2>
+          <form action="/login" method="POST">
+            <label for="email">メールアドレス</label>
+            <input type="text" name="email"><br>
+            <label for="password">パスワード</label>
+            <input type="password" name="password"><br>
+            <input type="submit" value="ログイン">
+          </form>
+          <span>新規登録をしていない方▶︎</span>
+          <a href="/signup">新規登録</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <%- include('head') %>
+
+  <body>
+    <%- include('header') %>
+    
+    <div class="container">
+      <div class="panel panel-signup">
+        <h1>新規登録</h1>
+        <% if (errors.length > 0) { %>
+          <ul class="errors">
+            <% errors.forEach(error => { %>
+              <li><%= error %></li>
+            <% }); %>
+          </ul>
+        <% } %>
+        <form action="/signup" method="POST">
+          <label for="username">ユーザー名</label>
+          <input type="text" name="username"><br>
+          <label for="email">メールアドレス</label>
+          <input type="text" name="email"><br>
+          <label for="password">パスワード</label>
+          <input type="password" name="password"><br>
+          <input type="submit" value="登録する">
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

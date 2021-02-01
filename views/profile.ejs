@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <%- include('head') %>
+
+  <body>
+    <%- include('header') %>
+
+    <div class="container">
+      <form action="/update/<%= locals.userId %>" method="POST">
+        <input type="text" value="<%= locals.username %>" name="userName">
+        <input type="submit" value="名前を変更する">
+      </form>
+      <div><a href="/logout">ログアウト</a></div>
+      <a href="/index/<%= locals.userId %>"><span class="material-icons">keyboard_return</span>もどる</a>
+    </div>
+  </body>
+</html>

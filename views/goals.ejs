@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <%- include('head') %>
+
+  <body>
+    <%- include('header') %>
+
+    <div class="container">
+      <div class="list-name">
+        <h1>みんなの目標・夢</h1>
+        <% if (locals.isLoggedIn) { %>
+          <a href="/goals_new">新規投稿<span class="material-icons">add</span></a>
+        <% } %>
+      </div>
+
+      <div class="goal-table">
+        <div class="table-head">
+          <div class="date-deadline">
+            <span class="date-column">設定日</span>
+            <span class="deadline-column">目標期限</span>
+          </div>
+          <div class="goal-column">目標・夢</div>
+        </div>
+        <ul class="table-body">
+          <% goals.forEach((goal) => { %>
+            <li class="table-list">
+              <div class="item-data">
+                <div class="date-deadline">
+                  <span class="date-column"><%= goal.date %></span>
+                  <span class="deadline-column"><%= goal.target_date %></span>
+                </div>
+                <% if (locals.userId === goal.user_id) { %>
+                  <div class="goal-column"><a href="/index/<%= locals.userId %>"><%= goal.content %></a></div>
+                <% } else { %>
+                  <div class="goal-column"><%= goal.content %></div>
+                <% } %>
+              </div>
+              <% if (locals.userId === goal.user_id) { %>
+                <div class="item-menu"><a href="/index/<%= locals.userId %>"><%= goal.username %></a></div>
+              <% } else { %>
+                <div class="item-menu"><%= goal.username %></div>
+              <% } %>
+            </li>
+          <% }); %>
+        </ul>
+      </div>
+      <div class="top-btn"><span class="material-icons">arrow_upward</span></div>
+    </div>
+
+    <script src="./js/script.js"></script>
+  </body>
+</html>

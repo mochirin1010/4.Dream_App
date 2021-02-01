@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <%- include('head') %>
+
+  <body>
+    <%- include('header') %>
+    
+    <div class="container">
+      <h1>カレンダー</h1>
+      <table>
+        <thead>
+          <tr>
+            <th id="prev">&laquo;</th>
+            <th id="title" colspan="5"></th>
+            <th id="next">&raquo;</th>
+          </tr>
+          <tr>
+            <th>Sun</td>
+            <th>Mon</th>
+            <th>Tue</th>
+            <th>Wed</th>
+            <th>Thu</th>
+            <th>Fri</th>
+            <th>Sat</th>
+          </tr>
+        </thead>
+        
+        <tbody></tbody>
+        
+        <tfoot>
+          <tr>
+            <td id="today" colspan="7">Today</td>
+          </tr>
+        </tfoot>
+      </table>
+
+      
+      <script>
+        console.clear();
+      
+        const today = new Date();
+        let year = today.getFullYear();
+        let month = today.getMonth();
+
+        function getCalendarHead() {
+          const dates = [];
+          const d = new Date(year, month, 0).getDate();      //先月の末日の日にち
+          const n = new Date (year, month, 1).getDay();      //先月の末日の日数
+
+          for (let i = 0; i < n; i++) {
+            dates.unshift({
+              date: d - i,
+              isToday:false,      //薄く表示させたいならtrue
+              isDisabled: true,
+            });
+          }
+          return dates;
+        }
+
+
+        function getCalendarBody() {
+          const dates = [];
+          const lastDate = new Date(year,month + 1, 0).getDate();   //今月の末日
+
+          for (let i = 1; i <= lastDate; i++) {
+            dates.push({
+              date: i,
+              isToday: false,
+              isDisabled: false,
+            });
+          }
+
+          //今日の日にちを太字にする
+          if (year === today.getFullYear() && month === today.getMonth()) {
+            dates[today.getDate() - 1].isToday = true;
+          }
+          return dates;
+        }
+
+
+        function getCalendarTail() {
+          const dates = [];
+          const lastDay = new Date(year, month + 1, 0).getDay();    //末日の曜日
+
+          for (let i = 1; i < 7 - lastDay; i++) {
+            dates.push({
+              date: i,
+              isToday: false,
+              isDisabled: true,
+            });
+          }
+          return dates;
+        }
+
+
+        function clearCalendar() {
+          const tbody = document.querySelector('tbody');
+
+          while (tbody.firstChild) {
+            tbody.removeChild(tbody.firstChild);
+          }
+        }
+
+
+        function renderTitle() {
+          const title = `${year}/${String(month + 1).padStart(2,'0')}`;  
+          document.getElementById('title').textContent = title;         
+        }
+
+
+        function renderWeeks() {
+          const dates =[
+            ...getCalendarHead(),
+            ...getCalendarBody(),
+            ...getCalendarTail(),
+          ];
+          const weeks = [];                        //週ごとの配列を入れる
+          const weekCount = dates.length / 7;      //何週分あるか
+
+          for (let i = 0; i < weekCount; i++) {
+            weeks.push(dates.splice(0,7));         //先頭から7つ分削除しつつ、取り出しす
+          }
+
+          weeks.forEach(week => {
+            const tr = document.createElement('tr');
+            week.forEach(date => {
+              const td = document.createElement('td');
+
+              td.textContent = date.date;
+              if(date.isToday) {
+                td.classList.add('today');
+              } 
+              if(date.isDisabled) {
+                td.classList.add('disabled');
+              }
+
+              tr.appendChild(td);
+            });
+            document.querySelector('tbody').appendChild(tr);
+          });
+        }
+
+
+        function createCalendar() {
+          clearCalendar();
+          renderTitle();
+          renderWeeks();
+        }
+
+
+        document.getElementById('prev').addEventListener('click', () => {
+          month--;
+          if(month < 0) {
+            year--;
+            month = 11;
+          }
+          createCalendar();
+        }) ;
+
+        document.getElementById('next').addEventListener('click', () => {
+          month++;
+          if(month > 11) {
+            year++;
+            month = 0;
+          }
+          createCalendar();
+        }) ;
+
+        document.getElementById('today').addEventListener('click', () => {
+          year = today.getFullYear();
+          month = today.getMonth();
+
+          createCalendar();
+        }) ;
+
+        createCalendar();
+      </script>
+    </div>
+  </body>
+</html>

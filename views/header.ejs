@@ -1,0 +1,20 @@
+<header>
+  <div class="header-left">
+    <% if (locals.isLoggedIn) { %>
+      <a class="header-logo" href="/calendar" >Dream App</a>
+    <% } else { %>
+      <a class="header-logo" href="/" >Dream App</a>
+    <% } %>
+  </div>
+  <div class="header-right">
+    <ul>
+      <% if (locals.isLoggedIn) { %>
+        <li><a href="/index/<%= locals.userId %>"><%= locals.username %>さんの目標</a></li>
+        <li><a href="/goals">みんなの目標</a></li>
+      <% } else { %>
+        <li><a href="/signup">ようこそ<%= locals.username %>さん</a></li>
+        <li><a href="/login">ログイン</a></li>
+      <% } %>
+    </ul>
+  </div>
+</header>
