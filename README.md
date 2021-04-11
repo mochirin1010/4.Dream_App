@@ -11,7 +11,7 @@
 メタタグを用いてSEO対策をしました。
 
 ## URL
-取得次第添付します。
+https://dreamapp1010.herokuapp.com/
 
 ## 開発環境
 Node.js
