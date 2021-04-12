@@ -6,7 +6,10 @@ const app = express();
 
 app.set("view engine", "ejs");
 
-app.listen(process.env.PORT || 3000);
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log("Start sever port: " + port);
+});
 
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: false}));
