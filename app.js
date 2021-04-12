@@ -3,7 +3,6 @@ const mysql = require('mysql');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
 const app = express();
-// server.listen(process.env.PORT || 3000);
 
 app.set("view engine", "ejs");
 
