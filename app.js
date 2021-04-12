@@ -19,7 +19,8 @@ const pool = new Pool({
 app.get('/db', async (req, res) => {
   try {
     const client = await pool.connect()
-    const result = await client.query('SELECT * FROM goals', 'SELECT * FROM users');
+    const result = await client.query('SELECT * FROM goals');
+    const result = await client.query('SELECT * FROM users');
     const results = { 'results': (result) ? result.rows : null};
     res.render('pages/db', results );
     client.release();
