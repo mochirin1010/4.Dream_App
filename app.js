@@ -3,8 +3,7 @@ const mysql = require('mysql');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
 const app = express();
-const PORT = process.env.PORT || 3000;
-listen(PORT, () => console.log(`Listening on ${ PORT }`))
+// server.listen(process.env.PORT || 3000);
 
 app.set("view engine", "ejs");
 
